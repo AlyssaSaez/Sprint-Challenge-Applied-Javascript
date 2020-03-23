@@ -17,3 +17,55 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+const carouselImgs = [
+  './assets/carousel/computer.jpeg',
+  './assets/carousel/mountains.jpeg',
+  './assets/carousel/trees.jpeg',
+  './assets/carousel/turntable.jpeg'
+];
+
+const carouselBox = document.querySelector('.carousel-container');
+
+function Carousel(array) {
+  const carousel = document.createElement('div'),
+    carouselLeft = document.createElement('div'),
+    carouselRight = document.createElement('div');
+
+  carousel.classList.add('carousel');
+  carouselLeft.classList.add('left-button');
+  carouselRight.classList.add('right-button');
+
+  carousel.appendChild(carouselLeft);
+  carousel.appendChild(carouselRight);
+
+  let i = 0;
+  const newImg = document.createElement('img');
+  newImg.src = array[i];
+  newImg.style.display = 'block';
+  carousel.append(newImg);
+
+  carouselLeft.onclick = function () {
+    if (i > 0) {
+      i -= 1;
+      newImg.src = array[i];
+    } else {
+      i = array.length - 1;
+      newImg.src = array[i];
+    }
+  };
+
+  carouselRight.onclick = function () {
+    if (i < array.length - 1) {
+      i += 1;
+      newImg.src = array[i];
+    } else {
+      i = 0;
+      newImg.src = array[i];
+    }
+  };
+  carouselLeft.textContent = ' < ';
+  carouselRight.textContent = ' > ';
+  return carousel;
+}
+carouselBox.append(Carousel(carouselImgs)); 
